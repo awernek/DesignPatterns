@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DesignPatterns.AbstractFactory/DesignPatterns.AbstractFactory.csproj" />
+  <Project Path="DesignPatterns.Console/DesignPatterns.Console.csproj" />
+</Solution>
