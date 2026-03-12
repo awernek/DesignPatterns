@@ -1,5 +1,6 @@
 namespace DesignPatterns.AbstractFactory;
 
+/// <summary>Equipamento de guincho capaz de socorrer um <see cref="Veiculo"/> compatível com seu porte.</summary>
 public abstract class Guincho
 {
     protected Guincho(Porte porte)
@@ -7,41 +8,10 @@ public abstract class Guincho
         Porte = porte;
     }
 
+    /// <summary>Porte do guincho (deve ser compatível com o veículo a socorrer).</summary>
     public Porte Porte { get; init; }
+
+    /// <summary>Executa o socorro do veículo informado.</summary>
+    /// <param name="veiculo">Veículo a ser socorrido.</param>
     public abstract void Socorrer(Veiculo veiculo);
-}
-
-public class GuinchoPequeno : Guincho
-{
-    public GuinchoPequeno(Porte porte) : base(porte) { }
-
-    public override void Socorrer(Veiculo veiculo) =>
-        Console.WriteLine($"Socorrendo veículo {veiculo} com guincho pequeno.");
-}
-
-public class GuinchoMedio : Guincho
-{
-    public GuinchoMedio(Porte porte) : base(porte) { }
-
-    public override void Socorrer(Veiculo veiculo) =>
-        Console.WriteLine($"Socorrendo veículo {veiculo} com guincho médio.");
-}
-
-public class GuinchoGrande : Guincho
-{
-    public GuinchoGrande(Porte porte) : base(porte) { }
-
-    public override void Socorrer(Veiculo veiculo) =>
-        Console.WriteLine($"Socorrendo veículo {veiculo} com guincho grande.");
-}
-
-public static class GuinchoCreator
-{
-    public static Guincho Criar(Porte porte) => porte switch
-    {
-        Porte.Pequeno => new GuinchoPequeno(porte),
-        Porte.Medio => new GuinchoMedio(porte),
-        Porte.Grande => new GuinchoGrande(porte),
-        _ => throw new ArgumentException("Porte desconhecido.", nameof(porte))
-    };
 }

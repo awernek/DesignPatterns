@@ -1,7 +1,12 @@
 namespace DesignPatterns.AbstractFactory;
 
+/// <summary>
+/// Implementação do seletor de fábricas: mapeia cada <see cref="Porte"/> para a
+/// fábrica concreta correspondente (pequeno, médio ou grande).
+/// </summary>
 public class AutoSocorroFactorySelector : IAutoSocorroFactorySelector
 {
+    /// <inheritdoc />
     public IAutoSocorroFactory ObterFactory(Porte porte) => porte switch
     {
         Porte.Pequeno => new SocorroVeiculoPequenoFactory(),
