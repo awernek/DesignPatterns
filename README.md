@@ -6,8 +6,9 @@ Repositório de exemplos de código com **Design Patterns** em C# (.NET), com fo
 
 ```
 DesignPatterns/
-├── DesignPatterns.Console      # Aplicação de console para executar os exemplos
-├── DesignPatterns.AbstractFactory
+├── DesignPatterns.Console           # Aplicação de console para executar os exemplos
+├── DesignPatterns.AbstractFactory    # Implementação do padrão Abstract Factory
+├── DesignPatterns.AbstractFactory.Tests   # Testes que ajudam a entender o padrão
 └── [outros padrões...]
 ```
 
@@ -23,6 +24,16 @@ dotnet run
 ```
 
 No menu, escolha o número do padrão que deseja ver em ação.
+
+## Testes
+
+Os testes servem como **documentação executável** do padrão: cada classe de teste destaca um conceito (seletor de fábricas, família de produtos, creators, orquestração).
+
+```bash
+dotnet test
+```
+
+Detalhes e interpretação dos testes do Abstract Factory: [DesignPatterns.AbstractFactory.Tests/README.md](DesignPatterns.AbstractFactory.Tests/README.md).
 
 ## Padrões disponíveis
 
