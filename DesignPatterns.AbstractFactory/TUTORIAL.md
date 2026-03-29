@@ -63,6 +63,29 @@ O cliente não faz `new`. A fábrica faz.
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Abstração** | `IAutoSocorroFactory`, `IVeiculo`, `IGuincho` — o cliente manipula só interfaces |
+| **Polimorfismo** | `factory.CriarVeiculo()` retorna `VeiculoPequeno` ou `VeiculoGrande` sem o cliente saber |
+| **Encapsulamento** | A factory concreta esconde qual classe instancia; o cliente nunca vê `new VeiculoPequeno()` |
+| **Herança** | Secundário aqui; o padrão prefere **composição** (o cliente recebe a factory) |
+
+### Princípios SOLID
+
+| Princípio | Situação | Como o padrão atende |
+|---|---|---|
+| **SRP** | Quem cria vs. quem usa | Cada factory cria uma família; `AutoSocorro` só usa |
+| **OCP** | Novo porte | Nova classe de factory — nenhuma classe existente muda |
+| **LSP** | Substituição | `SocorroVeiculoPequenoFactory` pode substituir qualquer `IAutoSocorroFactory` sem surpresas |
+| **ISP** | Interface da factory | Expõe só os métodos dos produtos da família — não vaza métodos irrelevantes |
+| **DIP** | Dependência | `AutoSocorro` depende de `IAutoSocorroFactory` (abstração), não de fábricas concretas |
+
+> DIP é o núcleo deste padrão: a inversão acontece porque a factory **entra de fora** pelo construtor.
+
 ## Quando usar
 
 - Famílias de produtos que devem ser compatíveis entre si.

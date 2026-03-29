@@ -56,6 +56,31 @@ A recursão acontece naturalmente.
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Abstração** | `IComponente` — cliente nunca sabe se tem um `Arquivo` ou uma `Pasta` na mão |
+| **Polimorfismo** | `ObterTamanho()` e `Exibir()` se comportam diferente em Leaf e Composite — mesma chamada, resultado diferente |
+| **Recursão estrutural** | `Pasta.ObterTamanho()` chama `ObterTamanho()` nos filhos, que podem ser outras pastas: recursão polimórfica natural |
+| **Encapsulamento** | `Pasta` gerencia sua `List<IComponente>` internamente; o cliente nunca acessa a lista diretamente |
+
+### Princípios SOLID
+
+| Princípio | Situação | Avaliação |
+|---|---|---|
+| **SRP** | `Arquivo` responde por si; `Pasta` gerencia composição | Bem delimitado — cada classe tem uma responsabilidade clara |
+| **OCP** | Novo tipo de componente (ex.: `ArquivoComprimido`) | Nova classe implementando `IComponente` — `Pasta.ObterTamanho()` não muda |
+| **LSP** | `Arquivo` e `Pasta` substituem `IComponente` | Atende — sem surpresas no contrato |
+| **ISP** | **Tensão clássica** | Se `IComponente` tivesse `Adicionar()`/`Remover()`, `Arquivo` teria que lançar `NotSupportedException` — violação clara de ISP. **Solução**: mantenha esses métodos só em `Pasta` |
+| **DIP** | Cliente usa `IComponente` | Atende — o loop recursivo não sabe se itera sobre folhas ou compostos |
+
+> **ISP é a tensão mais importante do Composite**.  
+> O GoF originalmente colocava `Add`/`Remove` em `IComponent` para "transparência máxima".  
+> A prática moderna prefere "segurança": exponha `Adicionar`/`Remover` só no `Composite` concreto — o cliente que precisar gerenciar filhos usa `Pasta` explicitamente.
+
 ## Quando usar
 
 - Estruturas hierárquicas: sistema de arquivos, menu/submenu, organograma, componentes de UI, carrinho com sub-kits.

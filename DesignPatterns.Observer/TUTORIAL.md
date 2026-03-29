@@ -74,6 +74,31 @@ pedido.AtualizarStatus(StatusPedido.Cancelado);              // fidelidade não 
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Abstração** | `IObserver` — `Pedido` nunca sabe se está notificando um e-mail, um controle de estoque ou um sistema de rastreio |
+| **Polimorfismo** | `observer.Atualizar(numero, status)` dispara comportamentos completamente diferentes dependendo do objeto |
+| **Encapsulamento** | Cada observer encapsula sua reação; `Pedido` encapsula sua lista de inscritos e estado |
+| **Composição** | `Pedido` **tem** uma lista de `IObserver` — acoplamento mínimo e dinâmico |
+
+### Princípios SOLID
+
+| Princípio | Situação | Como o padrão atende |
+|---|---|---|
+| **SRP** | Subject vs. Observers | `Pedido` gerencia estado e notifica; cada Observer reage de seu modo — responsabilidades separadas |
+| **OCP** | Novo observer (SMS, webhook) | Nova classe `ServicoSms : IObserver` + `Inscrever(sms)` — `Pedido.Notificar()` não muda uma linha |
+| **LSP** | Todos os observers substituem `IObserver` | `Atualizar(numero, status)` tem o mesmo contrato para todos — `Notificar()` não faz distinção |
+| **ISP** | `IObserver` minimal | Um único método `Atualizar` — observers não são obrigados a implementar nada além do necessário |
+| **DIP** | `Pedido` depende de `IObserver` | O Subject (domínio) define a abstração; os Observers (serviços) implementam — fluxo de dependência correto |
+
+> **Observer é DIP em modo evento**: em vez de `Pedido` chamar `servicoEmail.EnviarEmail()` diretamente (dependência de concreto), ele depende de `IObserver.Atualizar()` — os serviços concretos é que dependem do contrato do domínio.  
+>
+> Esse é também o fundamento dos **Domain Events** em DDD: o agregado publica eventos sem saber quem os consome.
+
 ## Quando usar
 
 - Eventos de domínio: status de pedido, alertas de estoque, notificações.

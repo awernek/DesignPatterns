@@ -67,6 +67,35 @@ public static Logger Instancia
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Encapsulamento** | Construtor `private` impede instanciação externa; campo `_instancia` é privado e controlado |
+| **Abstração** | Poderia expor `ILogger` para o resto do sistema depender apenas da interface |
+| **Herança / Polimorfismo** | Não são o foco aqui — Singleton é sobre controle de instância, não de comportamento |
+
+### Princípios SOLID
+
+| Princípio | Situação | Avaliação |
+|---|---|---|
+| **SRP** | Logger só loga | Atende — mas cuidado com Singletons que acumulam responsabilidades extras |
+| **OCP** | Adicionar novo destino de log | Tensão — a classe pode precisar mudar. Prefira strategy para o destino |
+| **LSP** | Não se aplica | Singleton raramente é polimórfico |
+| **ISP** | Expor `ILogger` | Recomendado: o resto do sistema depende da interface, não da classe concreta |
+| **DIP** | **Violação inerente** | Qualquer classe que chama `Logger.Instancia` cria dependência estática — o oposto de injeção |
+
+> **Tensão real com DIP**: Singleton e Injeção de Dependência são forças opostas.  
+> Em sistemas modernos, prefira registrar o Logger como `Singleton` no container de DI — você obtém instância única *e* injeção.
+>
+> ```csharp
+> // Preferível em ASP.NET / aplicações com DI:
+> services.AddSingleton<ILogger, Logger>();
+> // Qualquer classe recebe o ILogger via construtor — testável, sem dependência estática
+> ```
+
 ## Quando usar
 
 - Logger, pool de conexões, configuração da aplicação, cache em memória.

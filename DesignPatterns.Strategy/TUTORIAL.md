@@ -80,6 +80,30 @@ A troca é simples como trocar o campo.
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Composição sobre herança** | `Pedido` **tem** uma `IFreteStrategy` — não herda de `PedidoComCorreios`. É a aplicação mais direta desse princípio OOP |
+| **Polimorfismo** | `_strategy.CalcularFrete(...)` retorna valores diferentes dependendo do objeto injetado — sem `if/switch` |
+| **Abstração** | `IFreteStrategy` define o contrato; `Pedido` nunca vê a implementação concreta |
+| **Encapsulamento** | Cada strategy encapsula seu algoritmo — `CorreiosPacStrategy` esconde a fórmula de cálculo |
+
+### Princípios SOLID
+
+| Princípio | Situação | Como o padrão atende |
+|---|---|---|
+| **SRP** | Cada strategy tem um algoritmo | `TransportadoraExpressStrategy` só calcula express; `Pedido` só representa o pedido |
+| **OCP** | Nova modalidade de frete (drone) | Nova classe `DroneStrategy` — `Pedido` e o loop de comparação não mudam |
+| **LSP** | Concrete Strategies substituem `IFreteStrategy` | Mesmos parâmetros, mesmo tipo de retorno, sem surpresas — intercambiáveis sem exceção |
+| **ISP** | `IFreteStrategy` tem dois métodos | `CalcularFrete` e `PrazoEmDias` — coesos, sem método desnecessário para nenhuma strategy |
+| **DIP** | `Pedido` depende de `IFreteStrategy` | A abstração é definida no domínio; as strategies concretas são detalhes trocáveis |
+
+> **OCP + DIP juntos** são o cerne do Strategy: você estende com novas strategies (OCP) porque depende da abstração (DIP).  
+> Sem a abstração, cada nova modalidade exigiria `if` dentro de `Pedido`.
+
 ## Quando usar
 
 - Múltiplas variações de algoritmo (ordenação, cálculo, validação, compressão).

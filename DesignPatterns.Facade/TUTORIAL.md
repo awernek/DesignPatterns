@@ -59,6 +59,38 @@ Quem precisar de controle fino continua acessando-os direto.
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Encapsulamento** | `PagamentoFacade` esconde os subsistemas: o cliente não sabe que PayPal e MercadoPago existem |
+| **Abstração** | A Facade expõe uma API de alto nível (`Pagar`) sobre API de baixo nível dos subsistemas |
+| **Composição** | Facade **compõe** subsistemas via injeção no construtor — não herda deles |
+| **Polimorfismo** | Não é o foco: a variação aqui é de *orquestração*, não de *comportamento do objeto* |
+
+### Princípios SOLID
+
+| Princípio | Situação | Avaliação |
+|---|---|---|
+| **SRP** | Cada subsistema tem sua responsabilidade | Atende — PayPal processa, Notificação notifica, Facade só coordena |
+| **OCP** | Adicionar novo provedor | **Tensão**: a Facade precisa ser modificada para rotear para o novo provedor. Mitigação: use um dicionário ou strategy de roteamento interno |
+| **LSP** | Não é o foco | Facade geralmente não é substituída polimorficamente |
+| **ISP** | Interface da Facade | `Pagar(...)` é a API mínima exposta — subsistemas não vazam para o cliente |
+| **DIP** | Subsistemas injetados | Atende quando os subsistemas têm interfaces — `PagamentoFacade` dependeria de abstrações, não de classes concretas |
+
+> **Tensão com OCP**: toda vez que um novo provedor de pagamento chega, a `PagamentoFacade` muda.  
+> Solução: use uma **Strategy de roteamento** dentro da Facade:
+>
+> ```csharp
+> // Dentro da Facade, em vez de if/switch:
+> private readonly Dictionary<string, IProvedorPagamento> _provedores;
+> _provedores[provedor].Processar(conta, valor); // roteamento via Strategy
+> ```
+>
+> Assim novos provedores são registrados sem mudar a Facade.
+
 ## Quando usar
 
 - Simplificar acesso a uma biblioteca ou API complexa.

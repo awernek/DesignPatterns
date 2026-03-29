@@ -70,6 +70,29 @@ A variação vem da **herança** de dentro.
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Herança** | Mecanismo central — a subclasse existe *apenas* para sobrescrever `CriarMensagem()` |
+| **Polimorfismo** | `Notificar()` chama `CriarMensagem()` e recebe `EmailMensagem`, `SmsMensagem` ou `PushMensagem` em runtime |
+| **Abstração** | `IMensagem` e a classe abstrata `NotificacaoService` isolam o que varia do que é fixo |
+| **Encapsulamento** | O Creator esconde qual classe concreta foi instanciada; o cliente vê só `Notificar()` |
+
+### Princípios SOLID
+
+| Princípio | Situação | Como o padrão atende |
+|---|---|---|
+| **SRP** | Quem define o fluxo vs. quem decide o que criar | Creator controla o algoritmo; Concrete Creator decide a instanciação |
+| **OCP** | Novo canal (WhatsApp) | Nova subclasse — `Notificar()` não toca |
+| **LSP** | Concrete Creators | Qualquer `NotificacaoService` concreto pode substituir o abstrato sem quebrar `NotificacaoServiceSelector` |
+| **ISP** | `IMensagem` | Expõe só os três passos do fluxo (`Preparar`, `Enviar`, `RegistrarLog`) |
+| **DIP** | `Notificar()` depende de `IMensagem` | O template method não sabe qual classe concreta foi criada — depende da abstração |
+
+> **Herança aqui é necessária**, ao contrário do que DIP normalmente sugere. O padrão usa herança *controlada*: apenas um método varia.
+
 ## Quando usar
 
 - Um algoritmo fixo com um ponto de variação (qual objeto criar).

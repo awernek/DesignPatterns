@@ -71,6 +71,30 @@ Prefira sempre **Object Adapter** em C#.
 
 ---
 
+## SOLID & OOP
+
+### Pilares OOP em ação
+
+| Pilar | Como aparece |
+|---|---|
+| **Abstração** | `IProcessadorPagamento` — o domínio define *o que* precisa, sem se importar com *quem* entrega |
+| **Polimorfismo** | `ServicoDeCheckout` chama `ProcessarPagamento()` e o runtime decide se vai para PagSeguro, Stripe, etc. |
+| **Encapsulamento** | `PagSeguroAdapter` esconde conversões de tipo (`decimal → double`), campos ignorados e lógica de tradução |
+| **Composição** | Adapter **tem** um `PagSeguroApi` (campo); não herda dele — Object Adapter usa composição |
+
+### Princípios SOLID
+
+| Princípio | Situação | Como o padrão atende |
+|---|---|---|
+| **SRP** | Adapter faz só uma coisa | Traduz a interface — nenhuma regra de negócio aqui |
+| **OCP** | Novo gateway de pagamento | Novo `XyzAdapter` — `ServicoDeCheckout` e `IProcessadorPagamento` não mudam |
+| **LSP** | `PagSeguroAdapter` substitui qualquer `IProcessadorPagamento` | Sem surpresas: mesma pré/pós-condição do contrato |
+| **ISP** | `IProcessadorPagamento` | Tem só o que o domínio precisa — não vaza métodos do `PagSeguroApi` |
+| **DIP** | `ServicoDeCheckout` depende de `IProcessadorPagamento` | A abstração existe no domínio; o Adaptee (externo) é detalhe de infraestrutura |
+
+> **DIP em camadas**: `IProcessadorPagamento` vive no domínio; `PagSeguroApi` e `PagSeguroAdapter` vivem na infraestrutura.  
+> Essa é a fronteira de uma camada anti-corrupção (ACL) clássica.
+
 ## Quando usar
 
 - Integrar SDKs de terceiros sem contaminar o domínio.
