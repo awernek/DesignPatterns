@@ -1,5 +1,21 @@
 <Solution>
   <Project Path="DesignPatterns.AbstractFactory/DesignPatterns.AbstractFactory.csproj" />
   <Project Path="DesignPatterns.AbstractFactory.Tests/DesignPatterns.AbstractFactory.Tests.csproj" />
+  <Project Path="DesignPatterns.FactoryMethod/DesignPatterns.FactoryMethod.csproj" />
+  <Project Path="DesignPatterns.FactoryMethod.Tests/DesignPatterns.FactoryMethod.Tests.csproj" />
+  <Project Path="DesignPatterns.Singleton/DesignPatterns.Singleton.csproj" />
+  <Project Path="DesignPatterns.Singleton.Tests/DesignPatterns.Singleton.Tests.csproj" />
+  <Project Path="DesignPatterns.Adapter/DesignPatterns.Adapter.csproj" />
+  <Project Path="DesignPatterns.Adapter.Tests/DesignPatterns.Adapter.Tests.csproj" />
+  <Project Path="DesignPatterns.Facade/DesignPatterns.Facade.csproj" />
+  <Project Path="DesignPatterns.Facade.Tests/DesignPatterns.Facade.Tests.csproj" />
+  <Project Path="DesignPatterns.Composite/DesignPatterns.Composite.csproj" />
+  <Project Path="DesignPatterns.Composite.Tests/DesignPatterns.Composite.Tests.csproj" />
+  <Project Path="DesignPatterns.Command/DesignPatterns.Command.csproj" />
+  <Project Path="DesignPatterns.Command.Tests/DesignPatterns.Command.Tests.csproj" />
+  <Project Path="DesignPatterns.Strategy/DesignPatterns.Strategy.csproj" />
+  <Project Path="DesignPatterns.Strategy.Tests/DesignPatterns.Strategy.Tests.csproj" />
+  <Project Path="DesignPatterns.Observer/DesignPatterns.Observer.csproj" />
+  <Project Path="DesignPatterns.Observer.Tests/DesignPatterns.Observer.Tests.csproj" />
   <Project Path="DesignPatterns.Console/DesignPatterns.Console.csproj" />
 </Solution>

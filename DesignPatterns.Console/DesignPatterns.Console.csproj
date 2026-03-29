@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,6 +9,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DesignPatterns.AbstractFactory\DesignPatterns.AbstractFactory.csproj" />
+    <ProjectReference Include="..\DesignPatterns.FactoryMethod\DesignPatterns.FactoryMethod.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Singleton\DesignPatterns.Singleton.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Adapter\DesignPatterns.Adapter.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Facade\DesignPatterns.Facade.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Composite\DesignPatterns.Composite.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Command\DesignPatterns.Command.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Strategy\DesignPatterns.Strategy.csproj" />
+    <ProjectReference Include="..\DesignPatterns.Observer\DesignPatterns.Observer.csproj" />
   </ItemGroup>
 
 </Project>
